@@ -11,6 +11,7 @@ public class Kommandozeile {
 				System.out.print("Bier (0), Wein (1), Likör (2), Schnaps (3)>");
 				int drinkId = keyScan.nextInt();
 				tester.addKonsum(drinkId);
+				cmdInput = keyScan.nextLine();
 			} else if (cmdInput.equals("config")) {
 				System.out.print("Frau (f) oder Mann (m)>");
 				String geschlecht = keyScan.nextLine();
@@ -24,16 +25,19 @@ public class Kommandozeile {
 					isFemale = false;
 				}
 				tester.setPerson(weight, isFemale);
+				cmdInput = keyScan.nextLine();
 			} else if (cmdInput.equals("test")) {
 				if (tester.hasPerson() == false) {
 					System.out.print("Bitte zuerst Angaben zur Person erfassen (config)");
 				}
 				else {
-					tester.getCurrentLevel();
+					System.out.print("Alkoholwert von " + tester.getCurrentLevel());
 				}
+				cmdInput = keyScan.nextLine();
 			} else if (cmdInput.equals("print")) {
 				tester.printPerson();
 				tester.printAll();
+				cmdInput = keyScan.nextLine();
 			}
 		}
 	}

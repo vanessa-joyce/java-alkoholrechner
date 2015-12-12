@@ -21,8 +21,6 @@ public class AlkTest {
 		this.person.print();
 	}
 	
-	
-	
 	public void addKonsum(int drink) {
 		Getraenk getraenk = null;
 		switch (drink) {
@@ -37,6 +35,28 @@ public class AlkTest {
 		}
 		//System.out.println(getraenk);
 		konsum.add(getraenk);
+	}
+	
+	public double getCurrentLevel() {
+		double currentLevel = 0;
+		for (Getraenk getraenk : konsum) {
+			double levelOfNewDrink = (getraenk.getAlcTotal() / this.person.getDistribution());
+			// If not first drink, reduce currentLevel in relation to time passed
+			if (konsum.indexOf(getraenk) > 0) {
+				long secondsSinceLastDrink = getraenk.getTimeMilli() - konsum.get(konsum.indexOf(getraenk)-1).getTimeMilli();
+				currentLevel -= ((secondsSinceLastDrink/3600) * 0.15);
+			}
+			currentLevel += levelOfNewDrink;
+			System.out.print(currentLevel);
+			// If last drink, calculate time difference between drink and now
+			if (konsum.size() == konsum.indexOf(getraenk)-1) {
+				currentLevel -= ((getraenk.getDiffSecond()/3600)* 0.15);
+			}
+			if (currentLevel < 0) {
+				currentLevel = 0;
+			}
+		}
+		return currentLevel;
 	}
 	
 	public void printAll() {
