@@ -47,7 +47,6 @@ public class AlkTest {
 				currentLevel -= ((secondsSinceLastDrink/3600) * 0.15);
 			}
 			currentLevel += levelOfNewDrink;
-			System.out.print(currentLevel);
 			// If last drink, calculate time difference between drink and now
 			if (konsum.size() == konsum.indexOf(getraenk)-1) {
 				currentLevel -= ((getraenk.getDiffSecond()/3600)* 0.15);
